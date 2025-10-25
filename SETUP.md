@@ -3,8 +3,8 @@
 ## 前提条件
 
 ### 必須ツール
-- **Java 21以上** - [OpenJDK](https://openjdk.org/) または [Oracle JDK](https://www.oracle.com/java/)
-- **Maven 3.8以上** - [Apache Maven](https://maven.apache.org/)
+- **Java 17以上** - [OpenJDK](https://openjdk.org/) または [Oracle JDK](https://www.oracle.com/java/)
+- **Maven 3.9以上** - [Apache Maven](https://maven.apache.org/)
 - **Git** - [Git](https://git-scm.com/)
 - **IDE** - IntelliJ IDEA, VS Code, Eclipse等
 
@@ -27,23 +27,23 @@ mvn clean install
 
 ### 3. データベース設定
 
-#### 開発環境（H2）
-デフォルトでH2データベースを使用します。特別な設定は不要です。
-
-#### 本番環境（PostgreSQL）
+#### 開発環境（PostgreSQL）
 ```bash
 # PostgreSQL起動（Docker使用の場合）
 docker run -d \
-  --name postgres-dev \
-  -e POSTGRES_DB=memberdb \
-  -e POSTGRES_USER=member \
-  -e POSTGRES_PASSWORD=password \
+  --name memberlist-postgres \
+  -e POSTGRES_DB=memberlist \
+  -e POSTGRES_USER=memberlist_user \
+  -e POSTGRES_PASSWORD=memberlist_password \
   -p 5432:5432 \
   postgres:15
 
 # 接続確認
-psql -h localhost -U member -d memberdb
+psql -h localhost -U memberlist_user -d memberlist
 ```
+
+#### テスト環境（H2）
+テスト実行時は自動的にH2インメモリデータベースを使用します。特別な設定は不要です。
 
 ### 4. アプリケーション起動
 ```bash
@@ -56,8 +56,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
 ### 5. 動作確認
 - アプリケーション: http://localhost:8080
-- ヘルスチェック: http://localhost:8080/actuator/health
-- H2コンソール: http://localhost:8080/h2-console
+- H2コンソール（テスト時のみ）: http://localhost:8080/h2-console
 
 ## 開発環境設定
 
@@ -172,13 +171,24 @@ logging:
 ```
 project-root/
 ├── src/
-│   ├── main/java/com/example/
-│   ├── main/resources/
-│   └── test/java/com/example/
+│   ├── main/
+│   │   ├── java/com/example/jp/memberlist/
+│   │   │   ├── Application.java
+│   │   │   ├── presentation/      # プレゼンテーション層
+│   │   │   ├── application/       # アプリケーション層
+│   │   │   ├── domain/            # ドメイン層
+│   │   │   └── infrastructure/    # インフラ層
+│   │   └── resources/
+│   │       ├── application.yml
+│   │       ├── templates/
+│   │       └── static/
+│   └── test/
+│       ├── java/com/example/jp/memberlist/
+│       └── resources/
+│           └── application.yml
 ├── docs/               # ドキュメント
 ├── .github/           # GitHub設定
 ├── pom.xml            # Maven設定
-├── checkstyle.xml     # コーディング規約
 └── README.md          # プロジェクト概要
 ```
 
