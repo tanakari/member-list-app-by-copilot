@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンバー管理システム</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>メンバー管理システム</h1>
+        </header>
+        <main>
+            <div class="welcome">
+                <h2>ようこそ</h2>
+                <p>このアプリケーションは、メンバー情報を管理するシンプルなWebアプリケーションです。</p>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/members">メンバー一覧</a></li>
+                    <li><a href="/members/new">メンバー登録</a></li>
+                </ul>
+            </nav>
+        </main>
+        <footer>
+            <p>&copy; 2025 メンバー管理システム</p>
+        </footer>
+    </div>
+</body>
+</html>
