@@ -2,8 +2,10 @@ package com.example.jp.memberlist.domain.service;
 
 import com.example.jp.memberlist.domain.model.Email;
 import com.example.jp.memberlist.domain.repository.MemberRepository;
+import org.springframework.stereotype.Service;
 
-/** メンバードメインサービス */
+/** メンバードメインサービス. */
+@Service
 public class MemberDomainService {
   private final MemberRepository memberRepository;
 

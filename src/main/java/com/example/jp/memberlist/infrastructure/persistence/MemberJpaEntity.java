@@ -47,9 +47,6 @@ public class MemberJpaEntity {
     LocalDateTime now = LocalDateTime.now();
     createdAt = now;
     updatedAt = now;
-    if (isDeleted == false) {
-      isDeleted = false;
-    }
   }
 
   @PreUpdate
