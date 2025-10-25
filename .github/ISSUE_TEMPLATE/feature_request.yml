@@ -1,0 +1,131 @@
+name: 機能追加リクエスト
+description: 新しい機能や改善点の提案はこちらから
+title: "[Layer] "
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: layer
+    attributes:
+      label: レイヤー
+      description: この実装がどのレイヤーに該当するかを選択してください
+      options:
+        - "[DB] データベース層"
+        - "[Domain] ドメイン層"
+        - "[Repository] リポジトリ層"
+        - "[Service] サービス層"
+        - "[API] コントローラー層"
+        - "[UI] フロントエンド層"
+        - "[Integration] 統合・連携層"
+        - "[Test] テスト"
+        - "[Doc] ドキュメント"
+        - "[Epic] 機能全体（複数レイヤー）"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      description: この実装の優先度を選択してください
+      options:
+        - "High（緊急）"
+        - "Medium（通常）"
+        - "Low（余裕があるとき）"
+    validations:
+      required: true
+
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 実装概要
+      description: 何を実装するか、簡潔に記入してください（クラス名・メソッド名も含む）
+      placeholder: 例) MemberServiceクラスのcreateUserメソッド実装
+    validations:
+      required: true
+
+  - type: textarea
+    id: specification
+    attributes:
+      label: 参照仕様
+      description: 関連する仕様書ファイルを指定してください
+      placeholder: |
+        例）
+        - specs/api/members/create.md
+        - specs/ui/member-registration.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: 依存Issue
+      description: この実装に必要な前提となるIssueがあれば記載してください
+      placeholder: |
+        例）
+        - #123: Memberエンティティの実装 (必須)
+        - #124: MemberRepositoryの実装 (必須)
+
+  - type: textarea
+    id: followup
+    attributes:
+      label: 後続Issue  
+      description: このIssue完了後に実装可能になるIssueがあれば記載してください
+      placeholder: |
+        例）
+        - #126: メンバー登録画面実装
+        - #127: メンバー登録API-UI連携
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 実装内容
+      description: 具体的な実装内容を詳細に記入してください
+      placeholder: |
+        例）
+        1. MemberServiceクラス作成
+        2. createMember(MemberCreateRequest)メソッド実装
+        3. バリデーション処理追加
+        4. 例外ハンドリング
+        5. 単体テスト作成
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: 完了条件（Definition of Done）
+      description: このIssueが完了となる具体的な条件をチェックリストで記入してください
+      placeholder: |
+        - [ ] 仕様通りの機能実装
+        - [ ] 単体テスト実装（カバレッジ80%以上）
+        - [ ] コードレビュー完了
+        - [ ] 関連ドキュメント更新
+        - [ ] 統合テスト通過（該当する場合）
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: reference
+    attributes:
+      label: 参照確認
+      description: 下記ファイルを必ず確認してください
+      options:
+        - label: INSTRUCTIONS.mdを確認しました
+        - label: SPEC.mdを確認しました
+        - label: docs/development-flow.mdを確認しました
+        - label: docs/architecture.mdを確認しました
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📋 Issue作成のガイドライン
+        
+        - **1Issue = 1レイヤー**: 単一レイヤーに集中した実装にしてください
+        - **200行以下**: 1PRは最大200行以下になるよう調整してください
+        - **依存関係**: 前提となるIssueは必ず完了してから着手してください
+        - **仕様参照**: specs/内のファイルを必ず参照してください
+        
+        不明点はコメント欄で質問してください。

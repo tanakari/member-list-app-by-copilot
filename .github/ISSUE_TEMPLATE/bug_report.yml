@@ -1,0 +1,75 @@
+name: バグ報告
+description: バグや不具合の報告はこちらから
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: 分類
+      description: このバグがどの分類に該当するかを選択してください
+      options:
+        - 画面（フロントエンド）
+        - API（バックエンド）
+        - 画面-API連携
+        - 設計・ドキュメント
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 不具合の概要
+      description: どんなバグが発生したか、簡潔に記入してください
+      placeholder: 例) ログイン画面でエラーが表示される
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: バグを再現するための具体的な手順を記入してください
+      placeholder: 例) 1. ログイン画面を開く → 2. ユーザー名とパスワードを入力 → 3. ログインボタンを押す
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待される挙動
+      description: 本来どのような動作になるべきかを記入してください
+      placeholder: 例) 正常にダッシュボードに遷移する
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: 発生環境
+      description: OSやブラウザ、Javaのバージョンなど、バグの発生環境を記入してください
+      placeholder: 例) Windows 11 / Chrome 121 / Java 17
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 追加情報・ログ・スクリーンショット
+      description: エラーメッセージやログ、スクリーンショット等があれば記入・添付してください
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: reference
+    attributes:
+      label: 参照
+      description: 下記ファイルを必ず確認してください
+      options:
+        - label: INSTRUCTIONS.mdを確認しました
+        - label: README.mdを確認しました
+
+  - type: markdown
+    attributes:
+      value: |
+        不明点や追加情報があればコメント欄で質問してください。
