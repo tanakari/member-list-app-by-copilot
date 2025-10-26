@@ -19,6 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 /**
  * Integration tests for MemberRepository.
  * Uses @DataJpaTest for lightweight repository testing with an in-memory database.
+ * Tests are transactional and rolled back automatically after each test.
  */
 @DataJpaTest
 @ActiveProfiles("test")
@@ -36,8 +37,9 @@ class MemberRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        // Clear the database before each test
-        memberRepository.deleteAll();
+        // @DataJpaTest provides automatic transaction rollback,
+        // so the database is automatically cleaned between tests.
+        // We clear the entity manager to ensure a fresh state.
         entityManager.clear();
 
         // Create test data
@@ -289,18 +291,10 @@ class MemberRepositoryTest {
 
     @Test
     void testFindAllActive_OrderedByCreatedAtDesc() {
-        // Given
-        Member older = memberRepository.save(testMember1);
+        // Given - save members in sequence
+        Member first = memberRepository.save(testMember1);
         entityManager.flush();
-        
-        // Wait a bit to ensure different timestamps
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        
-        Member newer = memberRepository.save(testMember2);
+        Member second = memberRepository.save(testMember2);
         entityManager.flush();
         entityManager.clear();
 
@@ -308,9 +302,10 @@ class MemberRepositoryTest {
         List<Member> active = memberRepository.findAllActive();
 
         // Then - should be ordered by createdAt descending (newest first)
+        // The order should be deterministic based on creation order
         assertThat(active).hasSize(2);
-        assertEquals(newer.getId(), active.get(0).getId());
-        assertEquals(older.getId(), active.get(1).getId());
+        assertThat(active).extracting(Member::getId)
+                .containsExactly(second.getId(), first.getId());
     }
 
     @Test
