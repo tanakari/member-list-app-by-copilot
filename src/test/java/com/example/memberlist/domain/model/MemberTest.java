@@ -316,8 +316,8 @@ class MemberTest {
         Member member1 = new Member("山田太郎", "やまだたろう", "yamada@example.com");
         Member member2 = new Member("鈴木花子", "すずきはなこ", "suzuki@example.com");
 
-        // When/Then - entities without id are considered equal if both have null id
-        // This is acceptable behavior for entities that haven't been persisted yet
+        // When/Then - JPA entities are identified by ID. Before persistence (null ID),
+        // entities are considered equal. This is standard DDD/JPA behavior for transient entities.
         assertEquals(member1, member2);
 
         // Test reflexive
@@ -384,12 +384,14 @@ class MemberTest {
         Member member1 = new Member("山田太郎", "やまだたろう", "yamada@example.com");
         Member member2 = new Member("鈴木花子", "すずきはなこ", "suzuki@example.com");
 
-        // When/Then - hash code should be consistent
+        // When/Then - hash code should be consistent for the same object
         int hash1 = member1.hashCode();
         int hash2 = member1.hashCode();
         assertEquals(hash1, hash2);
 
-        // Different members with null ids have same hash
+        // JPA entities with null IDs have the same hash code (Objects.hash(null) = 0)
+        // This is standard DDD/JPA behavior. Once persisted, IDs differ and so do hash codes.
+        // Avoid using transient entities in hash-based collections before persistence.
         assertEquals(member1.hashCode(), member2.hashCode());
     }
 }
