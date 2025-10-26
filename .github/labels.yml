@@ -1,0 +1,124 @@
+# GitHubラベル設定
+# このファイルは github-label-sync などのツールで利用できます
+
+# 優先度ラベル
+- name: "優先度: 高"
+  color: "d73a4a"
+  description: "緊急対応が必要な課題"
+
+- name: "優先度: 中"
+  color: "fbca04" 
+  description: "通常の優先度で対応する課題"
+
+- name: "優先度: 低"
+  color: "0e8a16"
+  description: "余裕があるときに対応する課題"
+
+# レイヤーラベル
+- name: "レイヤー: DB"
+  color: "1f77b4"
+  description: "データベース層の実装"
+
+- name: "レイヤー: Domain"
+  color: "ff7f0e"
+  description: "ドメイン層の実装"
+
+- name: "レイヤー: Repository" 
+  color: "2ca02c"
+  description: "リポジトリ層の実装"
+
+- name: "レイヤー: Service"
+  color: "d62728"
+  description: "サービス層の実装"
+
+- name: "レイヤー: API"
+  color: "9467bd"
+  description: "API（コントローラー）層の実装"
+
+- name: "レイヤー: UI"
+  color: "8c564b"
+  description: "フロントエンド層の実装"
+
+- name: "レイヤー: Integration"
+  color: "e377c2"
+  description: "統合・連携層の実装"
+
+# 種別ラベル
+- name: "種別: 機能追加"
+  color: "a2eeef"
+  description: "新機能の追加"
+
+- name: "種別: バグ修正"
+  color: "d73a4a"
+  description: "バグの修正"
+
+- name: "種別: ドキュメント"
+  color: "0075ca"
+  description: "ドキュメントの更新"
+
+- name: "種別: リファクタリング"
+  color: "cfd3d7"
+  description: "コードの改善・リファクタリング"
+
+- name: "種別: テスト"
+  color: "f9d0c4"
+  description: "テストの追加・修正"
+
+# ステータスラベル
+- name: "ステータス: レビュー待ち"
+  color: "fbca04"
+  description: "コードレビュー待ちの状態"
+
+- name: "ステータス: 作業中"
+  color: "0e8a16"
+  description: "現在作業中"
+
+- name: "ステータス: ブロック中"
+  color: "d73a4a"
+  description: "何らかの理由でブロックされている"
+
+- name: "ステータス: 完了"
+  color: "28a745"
+  description: "作業完了"
+
+# サイズラベル
+- name: "サイズ: XS"
+  color: "c5f015"
+  description: "非常に小さな変更（～50行）"
+
+- name: "サイズ: S"
+  color: "a2eeef"
+  description: "小さな変更（51～100行）"
+
+- name: "サイズ: M"
+  color: "fbca04"
+  description: "中程度の変更（101～200行）"
+
+- name: "サイズ: L"
+  color: "ff9500"
+  description: "大きな変更（201～500行）"
+
+- name: "サイズ: XL"
+  color: "d73a4a"
+  description: "非常に大きな変更（500行超）"
+
+# 特別なラベル
+- name: "Epic"
+  color: "5319e7"
+  description: "複数のIssueにまたがる大きな機能"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "初心者におすすめの課題"
+
+- name: "help wanted"
+  color: "008672"
+  description: "コミュニティからのヘルプを求めている"
+
+- name: "依存関係あり"
+  color: "e99695"
+  description: "他のIssueに依存している"
+
+- name: "破壊的変更"
+  color: "b60205"
+  description: "破壊的変更を含む"
