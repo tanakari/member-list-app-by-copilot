@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: member-list-app-test
+
+  # H2 Database Configuration for Testing
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  # JPA Configuration for Testing
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# Logging Configuration (Test)
+logging:
+  level:
+    root: WARN
+    org.springframework: WARN
+    org.hibernate: WARN
