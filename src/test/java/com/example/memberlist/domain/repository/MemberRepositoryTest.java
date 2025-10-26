@@ -302,7 +302,7 @@ class MemberRepositoryTest {
         List<Member> active = memberRepository.findAllActive();
 
         // Then - should be ordered by createdAt descending (newest first)
-        // The order should be deterministic based on creation order
+        // Since 'second' was saved after 'first', it should appear first in the results
         assertThat(active).hasSize(2);
         assertThat(active).extracting(Member::getId)
                 .containsExactly(second.getId(), first.getId());
