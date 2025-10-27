@@ -10,6 +10,6 @@ public class DuplicateEmailException extends RuntimeException {
     }
 
     public DuplicateEmailException(String email, Throwable cause) {
-        super("Email already exists: " + email, cause);
+        super("メールアドレスが既に登録されています: " + email, cause);
     }
 }

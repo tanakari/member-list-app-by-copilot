@@ -68,7 +68,11 @@ public class MemberService {
 
         // Create new member
         Member member = new Member(name, nameKana, email);
-        member.updateInfo(name, nameKana, email, position, location, profileImageUrl, selfIntroduction);
+        
+        // Set optional fields if provided
+        if (position != null || location != null || profileImageUrl != null || selfIntroduction != null) {
+            member.updateInfo(name, nameKana, email, position, location, profileImageUrl, selfIntroduction);
+        }
 
         // Validate member
         Set<ConstraintViolation<Member>> violations = validator.validate(member);
