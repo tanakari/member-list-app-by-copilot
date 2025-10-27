@@ -55,6 +55,7 @@ public class Member {
     @Column(name = "profile_image_url", columnDefinition = "TEXT")
     private String profileImageUrl;
 
+    @Size(max = 1000, message = "自己紹介は1000文字以内で入力してください")
     @Column(name = "self_introduction", columnDefinition = "TEXT")
     private String selfIntroduction;
 
