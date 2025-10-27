@@ -31,12 +31,7 @@ public class GlobalExceptionHandler {
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
-                .map(error -> {
-                    if (error instanceof FieldError) {
-                        return error.getDefaultMessage();
-                    }
-                    return error.getDefaultMessage();
-                })
+                .map(error -> error.getDefaultMessage())
                 .collect(Collectors.toList());
 
         ErrorResponse response = ErrorResponse.of("バリデーションエラーです", errors);

@@ -357,4 +357,36 @@ class MemberServiceTest {
         assertNotNull(result);
         verify(memberRepository).save(any(Member.class));
     }
+
+    @Test
+    void testCreateMemberValidatesSelfIntroductionMaxLength() {
+        // Given
+        String longSelfIntroduction = "あ".repeat(1001);
+        when(memberRepository.existsByEmail("yamada@example.com")).thenReturn(false);
+
+        // When & Then
+        assertThrows(IllegalArgumentException.class,
+                () -> memberService.createMember("山田太郎", "やまだたろう", "yamada@example.com",
+                        null, null, null, longSelfIntroduction));
+
+        verify(memberRepository, never()).save(any(Member.class));
+    }
+
+    @Test
+    void testCreateMemberAcceptsValidSelfIntroductionLength() {
+        // Given
+        String validSelfIntroduction = "あ".repeat(1000);
+        Member savedMember = new Member("山田太郎", "やまだたろう", "yamada@example.com");
+
+        when(memberRepository.existsByEmail("yamada@example.com")).thenReturn(false);
+        when(memberRepository.save(any(Member.class))).thenReturn(savedMember);
+
+        // When
+        Member result = memberService.createMember("山田太郎", "やまだたろう", "yamada@example.com",
+                null, null, null, validSelfIntroduction);
+
+        // Then
+        assertNotNull(result);
+        verify(memberRepository).save(any(Member.class));
+    }
 }
